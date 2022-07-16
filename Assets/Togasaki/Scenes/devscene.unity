@@ -1766,8 +1766,12 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7455494601639816411, guid: 02fe60baa72fc9e49b556c4e143facd5, type: 3}
+      propertyPath: bulletObj2
+      value: 
+      objectReference: {fileID: 3594421842099670597, guid: 855790f2b37ec334cb03bfc5ba0e2470, type: 3}
+    - target: {fileID: 7455494601639816411, guid: 02fe60baa72fc9e49b556c4e143facd5, type: 3}
       propertyPath: bloodAmount
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7455494601639816411, guid: 02fe60baa72fc9e49b556c4e143facd5, type: 3}
       propertyPath: poolPosition

@@ -138,7 +138,7 @@ public class BloodManager : SingletonMonoBehaviour<BloodManager>
     private GameObject OnCreatePoolObject2()
     {
         // 生成処理
-        GameObject bullet = Instantiate(bulletObj, poolPosition.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletObj2, poolPosition.position, Quaternion.identity);
         //PooledObjectスクリプトをget
         FakeBlood pooled = bullet.GetComponent<FakeBlood>();
 
@@ -193,7 +193,6 @@ public class BloodManager : SingletonMonoBehaviour<BloodManager>
 
     public void GetFakeBlood()
     {
-        Debug.Log("EE");
         bloodObjectPool2.Get();
     }
 }

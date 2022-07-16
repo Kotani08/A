@@ -32,9 +32,6 @@ public class Blood : MonoBehaviour
     [SerializeField, Header("ç≈è¨ÇÃê‘êF")]
     private float minRed;
 
-    [SerializeField, Header("ìÆÇ©Ç»Ç¢åå")]
-    private GameObject bloodOrnament;
-
     /// <summary>
     /// ï\é¶Ç≥ÇÍÇΩÇÁ
     /// </summary>
@@ -53,7 +50,10 @@ public class Blood : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        BloodManager.Instance.GetFakeBlood();
+        if(collision.tag == "Goal")
+        {
+            BloodManager.Instance.GetFakeBlood();
+        }
     }
 
     /// <summary>
