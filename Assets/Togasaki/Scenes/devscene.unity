@@ -1518,7 +1518,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -552.33, y: -444.41003}
+  m_AnchoredPosition: {x: -552.33014, y: -444.41003}
   m_SizeDelta: {x: -1104.658, y: -888.817}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2119319460
@@ -1743,11 +1743,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7455494601639816411, guid: 02fe60baa72fc9e49b556c4e143facd5, type: 3}
       propertyPath: pw.x
-      value: 2000
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 7455494601639816411, guid: 02fe60baa72fc9e49b556c4e143facd5, type: 3}
       propertyPath: pw.y
-      value: 4000
+      value: 8000
       objectReference: {fileID: 0}
     - target: {fileID: 7455494601639816411, guid: 02fe60baa72fc9e49b556c4e143facd5, type: 3}
       propertyPath: maxSpd.x
@@ -1771,7 +1771,7 @@ PrefabInstance:
       objectReference: {fileID: 3594421842099670597, guid: 855790f2b37ec334cb03bfc5ba0e2470, type: 3}
     - target: {fileID: 7455494601639816411, guid: 02fe60baa72fc9e49b556c4e143facd5, type: 3}
       propertyPath: bloodAmount
-      value: 100
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 7455494601639816411, guid: 02fe60baa72fc9e49b556c4e143facd5, type: 3}
       propertyPath: poolPosition

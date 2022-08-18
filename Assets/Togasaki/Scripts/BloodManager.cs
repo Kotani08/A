@@ -31,23 +31,6 @@ public class BloodManager : SingletonMonoBehaviour<BloodManager>
 
     #endregion
 
-    #region プール2
-    /// <summary>
-    /// ObjectPool
-    /// </summary>
-    public ObjectPool<GameObject> bloodObjectPool2;
-
-    [SerializeField, Header("初期のオブジェクト生成量")]
-    private int defaultCapacity2 = 20;
-
-    [SerializeField, Header("プールの最大サイズ")]
-    private int poolMaxSize2 = 100;
-
-    [SerializeField, Header("プールするオブジェクト")]
-    private GameObject bulletObj2;
-
-    #endregion
-
 
     /// <summary>
     /// 一回で出す血の量
@@ -65,15 +48,6 @@ public class BloodManager : SingletonMonoBehaviour<BloodManager>
         true,
         defaultCapacity,
         poolMaxSize);
-
-        bloodObjectPool2 = new ObjectPool<GameObject>(
-        OnCreatePoolObject2,
-        OnTakeFromPool2,
-        OnReturnedToPool2,
-        OnDestroyPoolObject2,
-        true,
-        defaultCapacity2,
-        poolMaxSize2);
 
     }
 
@@ -129,57 +103,6 @@ public class BloodManager : SingletonMonoBehaviour<BloodManager>
         Destroy(obj);
     }
 
-
-    ////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// 生成処理2
-    /// </summary>
-    /// <returns>生成したオブジェクト</returns>
-    private GameObject OnCreatePoolObject2()
-    {
-        // 生成処理
-        GameObject bullet = Instantiate(bulletObj2, poolPosition.position, Quaternion.identity);
-        //PooledObjectスクリプトをget
-        FakeBlood pooled = bullet.GetComponent<FakeBlood>();
-
-        //プールしたオブジェクトの変数に情報を代入
-        pooled.objectPool = bloodObjectPool2;
-
-        return bullet;
-    }
-
-    /// <summary>
-    /// プールから取り出す処理
-    /// </summary>
-    private void OnTakeFromPool2(GameObject obj)
-    {
-        //プールから取り出されたら血をプレイヤーの位置へ
-        obj.transform.position = obj.transform.position;
-        obj.SetActive(true);
-    }
-
-    /// <summary>
-    /// プールに戻す処理
-    /// </summary>
-    private void OnReturnedToPool2(GameObject obj)
-    {
-        if (obj != null)
-        {
-            obj.transform.position = poolPosition.transform.position;
-            obj.SetActive(false);
-        }
-    }
-
-    /// <summary>
-    /// プールの許容量を超えた場合の破棄処理
-    /// </summary>
-    private void OnDestroyPoolObject2(GameObject obj)
-    {
-        Destroy(obj);
-    }
-
-
-
     /// <summary>
     /// 動く血を出す
     /// </summary>
@@ -189,10 +112,6 @@ public class BloodManager : SingletonMonoBehaviour<BloodManager>
         {
             bloodObjectPool.Get();
         }
-    }
 
-    public void GetFakeBlood()
-    {
-        bloodObjectPool2.Get();
     }
 }
