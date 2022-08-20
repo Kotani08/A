@@ -16,6 +16,22 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     private int jumpMax = 2;
     private int jumpCount = 0;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] Transform groundCheckPoint;
+    [SerializeField] Vector2 groundCheckSize;
+    public bool grounded;
+    public bool canJump;
+    [Header("For WallSliding")]
+    [SerializeField] float wallSlideSpeed = 0;
+    [SerializeField] LayerMask wallLayer;
+    [SerializeField] Transform wallCheckPoint;
+    [SerializeField] Vector2 wallCheckSize;
+    public bool isTouchingWall;
+    public bool isWallSliding;
+    [Header("For WallJumping")]
+    [SerializeField] float WallJumpForce = 18f;
+    [SerializeField] float wallJumpDirection = -1f;
+    [SerializeField] Vector2 wallJumpAngele;
     #endregion
 
     // PlayerのRigidbody取得
@@ -30,9 +46,17 @@ public class PlayerControl : MonoBehaviour
       //RandomRebirth();
       JumpReset();
     }
+
     void Update()
     {
         Playerwalk();
+        CheckWorld();
+    }
+
+    private void FixedUpdate()
+    {
+      WallSlide();
+      WallJump();  
     }
 
     #region 移動関連
@@ -45,7 +69,7 @@ public class PlayerControl : MonoBehaviour
 	    movingDirecion.Normalize();
 	    movingVelocity = movingDirecion * speed;
       if (Input.GetKeyDown(KeyCode.Space)) {Jump();}
-      if (Input.GetKeyDown(KeyCode.K)){Suicide();}
+      if (Input.GetKeyDown(KeyCode.K)) {Suicide();}
       //new input systemで使ってたやつ
       /*if (Gamepad.current != null)
       {
@@ -53,6 +77,11 @@ public class PlayerControl : MonoBehaviour
       }*/
        
       player.velocity = new Vector2(movingVelocity.x, player.velocity.y);
+      //ジャンプ回数を地面に振れた時に回復させる用
+      if (grounded)
+      {
+          JumpReset();
+      }
       #endregion
     }
     #endregion
@@ -60,15 +89,17 @@ public class PlayerControl : MonoBehaviour
     #region ジャンプ
     private void Jump()
     {
-      if(jumpCount >0){
-        jumpCount-=1;
+      if(jumpCount > 0)
+      {
+        jumpCount -= 1;
         player.AddForce(transform.up * JumpPower, ForceMode2D.Impulse);
         JumpFlag = true;
       }
     }
+
     private void JumpReset()
     {
-        jumpCount=jumpMax;
+        jumpCount = jumpMax;
         JumpFlag = false;
     }
     #endregion
@@ -82,19 +113,30 @@ public class PlayerControl : MonoBehaviour
         Destroy(this.GetComponent<PlayerControl>());
         //tagを地面と同じにする
         this.tag = "Ground";
+        //接触チェックのためにレイヤーを壁・地面判定できるレイヤーに変更する
+        this.gameObject.layer = 6;
         DeathFlag = true;
     }
     #endregion
 
     #region ぶつかった時の処理
+    void CheckWorld()
+    {
+        //地面に着いてるかチェック
+        grounded = Physics2D.OverlapBox(groundCheckPoint.position, groundCheckSize, 0, groundLayer);
+        //壁に接触してるかチェック
+        isTouchingWall = Physics2D.OverlapBox(wallCheckPoint.position, wallCheckSize, 0, wallLayer);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         //障害物とぶつかった時用
-        if(other.tag == "Goal"){Debug.Log("Goal");}
-        else{Suicide();}
+        if(other.tag == "Goal") {Debug.Log("Goal");}
+        //死ぬのは「デス」のタグが付いてる障害物とぶつかった時だけ
+        else if (other.tag == "Death") {Suicide();}
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    /*private void OnCollisionEnter2D(Collision2D other)
     {
         //ジャンプ回数を地面に振れた時に回復させる用
         if(other.gameObject.tag == "Ground")
@@ -109,12 +151,53 @@ public class PlayerControl : MonoBehaviour
               Debug.Log(movingDirecion.x);
             }
         }
+    }*/
+
+    #region 壁接触関係
+    //壁に貼り付いて滑り落ちるみたいな奴
+    void WallSlide()
+    {
+        if (isTouchingWall && !grounded && player.velocity.y < 0)
+        {
+            isWallSliding = true;
+        }
+        else
+        {
+            isWallSliding = false;
+        }
+
+        if (isWallSliding)
+        {
+            player.velocity = new Vector2(player.velocity.x, wallSlideSpeed);
+        }
+    }
+
+    //壁キック
+    void WallJump()
+    {
+        if ((isWallSliding || isTouchingWall) && canJump)
+        {
+            player.AddForce(new Vector2(WallJumpForce * wallJumpDirection * wallJumpAngele.x, WallJumpForce * wallJumpAngele.y), ForceMode2D.Impulse);
+            canJump = false;
+        }
     }
     #endregion
+    #endregion
 
+    //多分使わない復活時にステータス変わる奴
     private void RandomRebirth()
     {
       speed = Random.Range(0,100);
       JumpPower = Random.Range(0,70);
+    }
+
+    //これは無視していいやつ（インスペクターでこのスクリプト付けてる奴をクリックした状態でシーン画面上になんか描画される奴）
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawCube(groundCheckPoint.position, groundCheckSize);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(wallCheckPoint.position, wallCheckSize);
     }
 }

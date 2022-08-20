@@ -208,6 +208,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1106727923}
     m_Modifications:
+    - target: {fileID: 2396958677533936427, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396958677533936427, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: wallCheckPoint
+      value: 
+      objectReference: {fileID: 1722899287}
+    - target: {fileID: 2396958677533936427, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: wallCheckSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396958677533936427, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: wallCheckSize.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396958677533936427, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: groundCheckPoint
+      value: 
+      objectReference: {fileID: 1831833590}
+    - target: {fileID: 2396958677533936427, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: groundCheckSize.x
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3790842195655785298, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
       propertyPath: m_Name
       value: Player
@@ -278,11 +302,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3790842195655785299, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3790842195655785299, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3790842195655785299, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -296,7 +320,80 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 3790842195655785310, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3790842195655785310, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: m_SleepingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3790842195655785310, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4582304372588552772, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4582304372588552772, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4582304372588552772, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4582304372588552772, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383490708837877078, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383490708837877078, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383490708837877078, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837962641376416608, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837962641376416608, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: wallSlideSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837962641376416608, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: wallCheckSize.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837962641376416608, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: wallCheckSize.y
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837962641376416608, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: wallJumpAngele.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837962641376416608, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: wallJumpAngele.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837962641376416608, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: groundCheckSize.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8594803790835944791, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5837962641376416608, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
 --- !u!224 &497709095 stripped
 RectTransform:
@@ -395,7 +492,7 @@ GameObject:
   - component: {fileID: 703881457}
   - component: {fileID: 703881456}
   - component: {fileID: 703881455}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Stage (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1252,7 +1349,7 @@ GameObject:
   - component: {fileID: 1508611839}
   m_Layer: 5
   m_Name: Obstacle
-  m_TagString: Ground
+  m_TagString: Death
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1341,6 +1438,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1508611837}
   m_CullTransparentMesh: 1
+--- !u!224 &1722899287 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3544610189171081884, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+  m_PrefabInstance: {fileID: 497709094}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1831833590 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8824129007451800715, guid: 3e40ad2aec9543946b0e419629d1db34, type: 3}
+  m_PrefabInstance: {fileID: 497709094}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1936400668
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,7 +1655,7 @@ GameObject:
   - component: {fileID: 2119319461}
   - component: {fileID: 2119319460}
   - component: {fileID: 2119319462}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Stage
   m_TagString: Ground
   m_Icon: {fileID: 0}
