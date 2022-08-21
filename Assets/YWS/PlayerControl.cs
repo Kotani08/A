@@ -19,15 +19,15 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Transform groundCheckPoint;
     [SerializeField] Vector2 groundCheckSize;
-    public bool grounded;
-    public bool canJump;
+    private bool grounded;
+    private bool canJump;
     [Header("For WallSliding")]
     [SerializeField] float wallSlideSpeed = 0;
     [SerializeField] LayerMask wallLayer;
     [SerializeField] Transform wallCheckPoint;
     [SerializeField] Vector2 wallCheckSize;
-    public bool isTouchingWall;
-    public bool isWallSliding;
+    private bool isTouchingWall;
+    private bool isWallSliding;
     [Header("For WallJumping")]
     [SerializeField] float WallJumpForce = 18f;
     [SerializeField] float wallJumpDirection = -1f;
