@@ -23,9 +23,12 @@ public class DemoPlayerControl : MonoBehaviour
 
     private bool DeathFlag=false;
 
+    private Animator anim = null;
+
     void Start()
     {
         JumpReset();
+        anim = GetComponent<Animator>();
     }
     void Update()
     {
@@ -38,6 +41,24 @@ public class DemoPlayerControl : MonoBehaviour
       #region 移動関連
       float x = Input.GetAxisRaw("Horizontal");
       float z = Input.GetAxisRaw ("Vertical");
+
+      #region 後追加の走る処理
+    if (x > 0) 
+    {
+      transform.localScale = new Vector3(1, 1, 1);
+        anim.SetBool("Run", true);
+    }
+    else if (x < 0) 
+    {
+      transform.localScale = new Vector3(-1, 1, 1);
+        anim.SetBool("Run", true);
+    }
+    else
+    {
+        anim.SetBool("Run", false);
+    }
+    #endregion
+
       movingDirecion = new Vector2(x,z);
 	  movingDirecion.Normalize();
 	  movingVelocity = movingDirecion * speed;
@@ -71,12 +92,20 @@ public class DemoPlayerControl : MonoBehaviour
     #region 死ぬときの処理
     public void Suicide()
     {
+      //Animator用の処理
+      transform.localScale = new Vector3(1, 1, 1);
+      anim.SetBool("Run", false);
+      Destroy(anim);
+        this.transform.Rotate(new Vector3(0f,0f,90f));
+        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y-10,this.transform.position.z);
+
         //動かないようにStaticに変更
         this.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         //DemoPlayerControlを消して処理を軽減
         Destroy(this.GetComponent<DemoPlayerControl>());
         //tagを地面と同じにする
         this.tag = "Ground";
+        DeathFlag = true;
 
         //これでシングルトンにしたBloodManagerにて血が出ている
         BloodManager.Instance.RunBlood();

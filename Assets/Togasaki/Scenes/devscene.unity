@@ -706,7 +706,7 @@ RectTransform:
   m_GameObject: {fileID: 1106727922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 516215157}
@@ -1056,6 +1056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 3790842195655785298, guid: cc431417921004a4898dfdaa4e93e06f, type: 3}
+  PlayerParent: {fileID: 1106727922}
   CountText: {fileID: 1482752642}
   playerPos: {fileID: 516215157}
 --- !u!4 &1440487545
@@ -1637,6 +1638,14 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3790842195655785299, guid: cc431417921004a4898dfdaa4e93e06f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3790842195655785299, guid: cc431417921004a4898dfdaa4e93e06f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3790842195655785299, guid: cc431417921004a4898dfdaa4e93e06f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1666,11 +1675,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3790842195655785299, guid: cc431417921004a4898dfdaa4e93e06f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -714
+      value: -344
       objectReference: {fileID: 0}
     - target: {fileID: 3790842195655785299, guid: cc431417921004a4898dfdaa4e93e06f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -124
       objectReference: {fileID: 0}
     - target: {fileID: 3790842195655785299, guid: cc431417921004a4898dfdaa4e93e06f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

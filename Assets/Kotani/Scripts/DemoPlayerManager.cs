@@ -8,6 +8,8 @@ public class DemoPlayerManager : SingletonMonoBehaviour<DemoPlayerManager>
     //プレイヤーが死んだら新しいプレイヤーを生成する
     [SerializeField]
     private GameObject PlayerPrefab;
+    [SerializeField]
+    private GameObject PlayerParent;
     private GameObject Player;
     private Vector3 PlayerPoj;
     private GameObject AlivePlayer;
@@ -38,14 +40,27 @@ public class DemoPlayerManager : SingletonMonoBehaviour<DemoPlayerManager>
             CountText.text = Count.ToString();
             PlayerReborn();
         }
+        //リセットの処理
+        if (Input.GetKeyDown(KeyCode.R)){Reset();}
     }
 
     private void PlayerReborn()
     {
         AlivePlayer = Instantiate(PlayerPrefab, PlayerPoj, Quaternion.identity);
-        AlivePlayer.transform.parent = Player.transform;
+        AlivePlayer.transform.parent = PlayerParent.transform;
         AlivePlayer.transform.localScale = new Vector2(1,1);
         _playerControl = AlivePlayer.GetComponent<DemoPlayerControl>();
         playerPos = AlivePlayer.transform;
+    }
+
+    //リセットの処理
+    private void Reset()
+    {
+        //子オブジェクトを一つずつ取得
+        foreach (Transform child in PlayerParent.transform)
+        {
+            //削除する
+            Destroy(child.gameObject);
+        }
     }
 }
