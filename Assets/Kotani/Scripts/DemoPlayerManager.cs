@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DemoPlayerManager : MonoBehaviour
+public class DemoPlayerManager : SingletonMonoBehaviour<DemoPlayerManager>
 {
     //プレイヤーが死んだら新しいプレイヤーを生成する
     [SerializeField]
@@ -15,6 +15,12 @@ public class DemoPlayerManager : MonoBehaviour
     [SerializeField]
     private Text CountText;
     private int Count;
+
+    /// <summary>
+    /// プレイヤーの位置
+    /// 血を出す場所の更新に必要
+    /// </summary>
+    public Transform playerPos;
     
     // Start is called before the first frame update
     void Start(){
@@ -40,5 +46,6 @@ public class DemoPlayerManager : MonoBehaviour
         AlivePlayer.transform.parent = Player.transform;
         AlivePlayer.transform.localScale = new Vector2(1,1);
         _playerControl = AlivePlayer.GetComponent<DemoPlayerControl>();
+        playerPos = AlivePlayer.transform;
     }
 }

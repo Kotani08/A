@@ -77,7 +77,13 @@ public class DemoPlayerControl : MonoBehaviour
         Destroy(this.GetComponent<DemoPlayerControl>());
         //tagを地面と同じにする
         this.tag = "Ground";
+
+        //これでシングルトンにしたBloodManagerにて血が出ている
+        BloodManager.Instance.RunBlood();
+
+
         DeathFlag = true;
+
     }
     #endregion
 
