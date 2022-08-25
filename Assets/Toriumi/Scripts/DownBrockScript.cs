@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DownBrockScript : MonoBehaviour
 {
@@ -14,10 +15,13 @@ public class DownBrockScript : MonoBehaviour
     float downpos = -100f;  // ブロックが落ちる終点位置
 
     private bool Hit = false;
+
+    //再度使いまわす用に最初の位置を覚えておく
+    private Vector2 fastPoj;
     // Start is called before the first frame update
     void Start()
     {
-        
+        fastPoj = this.transform.localPosition;
     }
 
     // Update is called once per frame
@@ -26,14 +30,16 @@ public class DownBrockScript : MonoBehaviour
         if(Hit)
         {
             Transform down = this.transform;
-            Vector2 pos = down.position;
-            if(pos.y >= basepos)
+            Vector2 pos = down.localPosition;
+            if(pos.y <= basepos)
             {
                 // ブロックが落ちる(今の位置、落ちる終点位置、落ちる速度)
                 pos.y = Mathf.MoveTowards(pos.y, downpos, Time.deltaTime * speed);
-                down.position = pos;
+                down.localPosition = pos;
             }
         }
+        if (Input.GetKeyDown(KeyCode.R)){Reset();}
+        if(Gamepad.current.rightTrigger.wasPressedThisFrame){Reset();}
     }
 
     // トリガー判定
@@ -44,6 +50,11 @@ public class DownBrockScript : MonoBehaviour
         {
             Hit = true;
         }
+    }
+    private void Reset()
+    {
+        this.transform.localPosition = fastPoj;
+        Hit = false;
     }
 
     // おまけ

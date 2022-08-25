@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SlideBrockScript : MonoBehaviour
 {
@@ -14,10 +15,13 @@ public class SlideBrockScript : MonoBehaviour
     float slidepos = -100f;     // ブロックが横切る終点位置
 
     private bool Hit = false;   // 当たり判定
+
+    //再度使いまわす用に最初の位置を覚えておく
+    private Vector2 fastPoj;
     // Start is called before the first frame update
     void Start()
     {
-        
+        fastPoj = this.transform.localPosition;
     }
 
     // Update is called once per frame
@@ -25,15 +29,18 @@ public class SlideBrockScript : MonoBehaviour
     {
         if (Hit)
         {
+            Debug.Log("aaaaaaa");
             Transform slide = this.transform;
-            Vector2 pos = slide.position;
+            Vector2 pos = slide.localPosition;
             if (pos.x >= basepos)
             {
                 // ブロックが落ちる(今の位置、横切る終点位置、横切る速度)
                 pos.x = Mathf.MoveTowards(pos.x, slidepos, Time.deltaTime * speed);
-                slide.position = pos;
+                slide.localPosition = pos;
             }
         }
+        if (Input.GetKeyDown(KeyCode.R)){Reset();}
+        if(Gamepad.current.rightTrigger.wasPressedThisFrame){Reset();}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -43,6 +50,11 @@ public class SlideBrockScript : MonoBehaviour
         {
             Hit = true;
         }
+    }
+    private void Reset()
+    {
+        this.transform.localPosition = fastPoj;
+        Hit = false;
     }
 }
 

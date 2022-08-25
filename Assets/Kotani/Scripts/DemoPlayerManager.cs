@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class DemoPlayerManager : SingletonMonoBehaviour<DemoPlayerManager>
 {
@@ -17,6 +18,8 @@ public class DemoPlayerManager : SingletonMonoBehaviour<DemoPlayerManager>
     [SerializeField]
     private Text CountText;
     private int Count;
+    [SerializeField]
+    private GameObject PlayerCount;
 
     /// <summary>
     /// プレイヤーの位置
@@ -39,13 +42,19 @@ public class DemoPlayerManager : SingletonMonoBehaviour<DemoPlayerManager>
             Count++;
             CountText.text = Count.ToString();
             PlayerReborn();
+            if(PlayerCount != null){PlayerCount.SetActive(true);};
         }
         //リセットの処理
         if (Input.GetKeyDown(KeyCode.R)){Reset();}
+        if (Gamepad.current != null)
+      {
+        if(Gamepad.current.rightTrigger.wasPressedThisFrame){Reset();}
+      }
     }
 
     private void PlayerReborn()
     {
+        
         AlivePlayer = Instantiate(PlayerPrefab, PlayerPoj, Quaternion.identity);
         AlivePlayer.transform.parent = PlayerParent.transform;
         AlivePlayer.transform.localScale = new Vector2(1,1);
@@ -56,6 +65,7 @@ public class DemoPlayerManager : SingletonMonoBehaviour<DemoPlayerManager>
     //リセットの処理
     private void Reset()
     {
+        Count = Count-1;
         //子オブジェクトを一つずつ取得
         foreach (Transform child in PlayerParent.transform)
         {

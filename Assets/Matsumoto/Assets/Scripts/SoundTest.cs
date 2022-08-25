@@ -12,6 +12,8 @@ public class SoundTest : MonoBehaviour
     //ダメージ音
     [SerializeField]
     AudioClip DamageSE;
+    [SerializeField]
+    AudioClip ClearSE;
 
     public int HP = 100;
     void Start()
@@ -21,10 +23,10 @@ public class SoundTest : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        /*if(Input.GetKeyDown(KeyCode.Escape))
         {
             HP -= 10;
             soundManager.PlaySe(DamageSE);
-        }
+        }*/
     }
 }

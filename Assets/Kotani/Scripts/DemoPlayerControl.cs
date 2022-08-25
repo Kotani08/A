@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DemoPlayerControl : MonoBehaviour
 {
@@ -25,14 +26,34 @@ public class DemoPlayerControl : MonoBehaviour
 
     private Animator anim = null;
 
+    //Manager呼び出し
+    [SerializeField]
+    SoundManager soundManager;
+    //ダメージ音
+    [SerializeField]
+    AudioClip DamageSE;
+    //クリア時の音
+    [SerializeField]
+    AudioClip ClearSE;
+
+    private bool stopMove=false;
+
+    [SerializeField]
+    FadeManager fadeManager;
+
+
     void Start()
     {
         JumpReset();
         anim = GetComponent<Animator>();
+        GameObject set = GameObject.Find("GameManager");
+        soundManager = set.GetComponent<SoundManager>();
+        fadeManager = set.GetComponent<FadeManager>();
+
     }
     void Update()
     {
-        Playerwalk();
+      if(stopMove == false){Playerwalk();}
     }
 
     #region 移動関連
@@ -65,10 +86,11 @@ public class DemoPlayerControl : MonoBehaviour
       if (Input.GetKeyDown(KeyCode.Space)) {Jump();}
       if (Input.GetKeyDown(KeyCode.K)){Suicide();}
       //new input systemで使ってたやつ
-      /*if (Gamepad.current != null)
+      if (Gamepad.current != null)
       {
         if (Gamepad.current.buttonSouth.wasPressedThisFrame){Jump();}
-      }*/
+        if(Gamepad.current.rightShoulder.wasPressedThisFrame){Suicide();}
+      }
        
       player.velocity = new Vector2(movingVelocity.x, player.velocity.y);
       #endregion
@@ -93,6 +115,7 @@ public class DemoPlayerControl : MonoBehaviour
     public void Suicide()
     {
       //Animator用の処理
+      soundManager.PlaySe(DamageSE);
       transform.localScale = new Vector3(1, 1, 1);
       anim.SetBool("Run", false);
       Destroy(anim);
@@ -110,9 +133,17 @@ public class DemoPlayerControl : MonoBehaviour
         //これでシングルトンにしたBloodManagerにて血が出ている
         BloodManager.Instance.RunBlood();
 
-
         DeathFlag = true;
 
+    }
+    #endregion
+
+    #region ゴール時の処理
+    private void Gool()
+    {
+      fadeManager.SetfadeStopFlag(false);
+      stopMove = true;
+      soundManager.PlaySe(ClearSE);
     }
     #endregion
 
@@ -120,8 +151,17 @@ public class DemoPlayerControl : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         //障害物とぶつかった時用
-        if(other.tag == "Goal"){Suicide();}
-        else{Debug.Log("Goal");}
+        switch(other.tag)
+        {
+          case "Goal":
+          Gool();
+          break;
+          case "Out":
+          Suicide();
+          break;
+          default:
+          break;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
