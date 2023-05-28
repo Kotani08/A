@@ -54,12 +54,13 @@ public class DemoPlayerManager : SingletonMonoBehaviour<DemoPlayerManager>
 
     private void PlayerReborn()
     {
-        
-        AlivePlayer = Instantiate(PlayerPrefab, PlayerPoj, Quaternion.identity);
-        AlivePlayer.transform.parent = PlayerParent.transform;
-        AlivePlayer.transform.localScale = new Vector2(1,1);
-        _playerControl = AlivePlayer.GetComponent<DemoPlayerControl>();
-        playerPos = AlivePlayer.transform;
+      //初期位置にプレイヤーを出して管理しやすいように親子関係にする
+      AlivePlayer = Instantiate(PlayerPrefab, PlayerPoj, Quaternion.identity);
+      AlivePlayer.transform.parent = PlayerParent.transform;
+      AlivePlayer.transform.localScale = new Vector2(1,1);
+
+      _playerControl = AlivePlayer.GetComponent<DemoPlayerControl>();
+      playerPos = AlivePlayer.transform;
     }
 
     //リセットの処理

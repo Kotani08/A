@@ -111,46 +111,44 @@ public class DemoPlayerControl : MonoBehaviour
     }
     #endregion
 
-    #region 死ぬときの処理
+    #region 死亡時の処理
     public void Suicide()
     {
-      //Animator用の処理
+      #region アニメーション,SEなど演出の処理
       soundManager.PlaySe(DamageSE);
       transform.localScale = new Vector3(1, 1, 1);
       anim.SetBool("Run", false);
       Destroy(anim);
-        this.transform.Rotate(new Vector3(0f,0f,90f));
-        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y-10,this.transform.position.z);
+      this.transform.Rotate(new Vector3(0f,0f,90f));
+      this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y-10,this.transform.position.z);
+      #endregion
 
-        //動かないようにStaticに変更
-        this.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        //DemoPlayerControlを消して処理を軽減
-        Destroy(this.GetComponent<DemoPlayerControl>());
-        //tagを地面と同じにする
-        this.tag = "Ground";
-        DeathFlag = true;
-
-        //これでシングルトンにしたBloodManagerにて血が出ている
-        BloodManager.Instance.RunBlood();
-
-        DeathFlag = true;
-
+      //足場にしたいのでStaticに変更
+      this.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+      //DemoPlayerControlを消して動かないようにする
+      Destroy(this.GetComponent<DemoPlayerControl>());
+      //プレイヤー用にtagを地面と同じにする
+      this.tag = "Ground";
+      DeathFlag = true;
+      //これでシングルトンにしたBloodManagerで血が出る
+      BloodManager.Instance.RunBlood();
     }
     #endregion
 
     #region ゴール時の処理
     private void Gool()
     {
+      soundManager.PlaySe(ClearSE);
+      //ゴール後、入力を受け付けなくする
       fadeManager.SetfadeStopFlag(false);
       stopMove = true;
-      soundManager.PlaySe(ClearSE);
     }
     #endregion
 
-    #region ぶつかった時の処理
+    #region ゴールと障害物の処理
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //障害物とぶつかった時用
+        //障害物とぶつかった時
         switch(other.tag)
         {
           case "Goal":
@@ -160,6 +158,7 @@ public class DemoPlayerControl : MonoBehaviour
           Suicide();
           break;
           default:
+          Debug.Log("現在未設定のタグです");
           break;
         }
     }
@@ -169,8 +168,8 @@ public class DemoPlayerControl : MonoBehaviour
         //ジャンプ回数を地面に振れた時に回復させる用
         if(other.gameObject.tag == "Ground")
         {
-            JumpReset();
-            return;
+          JumpReset();
+          return;
         }
     }
     #endregion

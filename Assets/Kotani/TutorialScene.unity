@@ -3440,6 +3440,7 @@ MonoBehaviour:
   PlayerPrefab: {fileID: 3790842195655785298, guid: cc431417921004a4898dfdaa4e93e06f, type: 3}
   PlayerParent: {fileID: 1106727922}
   CountText: {fileID: 1482752642}
+  PlayerCount: {fileID: 0}
   playerPos: {fileID: 516215157}
 --- !u!4 &1440487545
 Transform:

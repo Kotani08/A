@@ -18,7 +18,9 @@ public class SoundTest : MonoBehaviour
     public int HP = 100;
     void Start()
     {
+        if(soundManager != null){
         soundManager.PlayBgm(StartBGM);
+        }
     }
 
     private void Update()

@@ -8,6 +8,7 @@ public class title : MonoBehaviour
 {
     void Update()
     {
+        if (Gamepad.current == null) return;
         if(Gamepad.current.leftShoulder.wasPressedThisFrame){TitleChanger();}
     }
     public void TitleChanger()

@@ -3,7 +3,7 @@ public class SoundManager : MonoBehaviour
 {
     // BGM用、SE用
     [SerializeField]
-    AudioSource bgmAudioSource;
+    public AudioSource bgmAudioSource;
     [SerializeField]
     AudioSource seAudioSource;
 
